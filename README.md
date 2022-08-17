@@ -11,7 +11,7 @@ cd dockerized-jekyll-nginx-letsencrypt-cron
  
 Execute 
 ```
-docker-compose -f docker-compose-create.yml run jekyllcreate jekyll new html
+docker-compose  run jekyllcreate jekyll new html
 ```
 The command will initiate a new Jekyll site inside the folder named "html".
 
