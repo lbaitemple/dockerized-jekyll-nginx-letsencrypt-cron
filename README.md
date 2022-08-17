@@ -18,8 +18,7 @@ CERTBOT_EMAILS="info@evgeniy-khyst.com info@evgeniy-khyst.com"
 
 For each domain configure the Nginx [`server` block](https://nginx.org/en/docs/http/ngx_http_core_module.html#server) by updating `vhosts/${domain}.conf`:
 
-- `vhosts/test1.evgeniy-khyst.com.conf`
-- `vhosts/test2.evgeniy-khyst.com.conf`
+- `vhosts/domainname.conf`
 
 #### <a id="cdbe8e85146b30abdbb3425163a3b7a2"></a>Serving static content
 
@@ -39,7 +38,6 @@ docker volume create --name=nginx_conf
 docker volume create --name=letsencrypt_certs
 ```
 
-
  - A template to run a Jekyll site served on Nginx using Docker build. 
  
 Execute 
@@ -48,4 +46,15 @@ docker-compose  run jekyllcreate jekyll new html
 ```
 The command will initiate a new Jekyll site inside the folder named "html".
 
+
+```
+docker-compose up -d --build
+```
+```
+cd html
+ln -s _site domain_name
+```
+```
+docker-compose logs -f
+```
 
