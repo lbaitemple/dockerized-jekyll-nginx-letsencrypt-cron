@@ -50,9 +50,12 @@ The command will initiate a new Jekyll site inside the folder named "html".
 ```
 docker-compose up -d --build
 ```
+This will create a _site in html based on the Jekyll
+
 ```
 cd html
 ln -s _site domain_name
+cd ..
 ```
 ```
 docker-compose logs -f
