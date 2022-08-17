@@ -1,0 +1,59 @@
+version: "2"
+
+services:
+  jekyllcreate:
+    image: jekyll/jekyll:latest
+    volumes:
+      - $PWD:/srv/jekyll
+  jekyllbuild:
+    build:
+      context: .
+      args:
+        build_command: "jekyll build --watch"
+    volumes:
+      - "./html:/srv/jekyll"
+    ports:
+      - 4000:4000
+      - 35729:35729
+  nginx:
+    build: ./nginx
+    image: libai/nginx
+    env_file:
+      - ./config.env
+    volumes:
+      - nginx_conf:/etc/nginx/sites
+      - letsencrypt_certs:/etc/letsencrypt
+      - certbot_acme_challenge:/var/www/certbot
+      - ./vhosts:/etc/nginx/vhosts
+#      - ./html:/var/www/html
+      - ./html/:/var/www/html
+    ports:
+      - "80:80"
+      - "443:443"
+    restart: unless-stopped
+
+  certbot:
+    build: ./certbot
+    image: libai/certbot
+    env_file:
+      - ./config.env
+    volumes:
+      - letsencrypt_certs:/etc/letsencrypt
+      - certbot_acme_challenge:/var/www/certbot
+
+  cron:
+    build: ./cron
+    image: libai/cron
+    environment:
+      COMPOSE_PROJECT_NAME: "${COMPOSE_PROJECT_NAME}"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./:/workdir:ro
+    restart: unless-stopped
+
+volumes:
+  nginx_conf:
+    external: true
+  letsencrypt_certs:
+    external: true
+  certbot_acme_challenge:
