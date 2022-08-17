@@ -7,6 +7,12 @@ git clone https://github.com/lbaitemple/dockerized-jekyll-nginx-letsencrypt-cron
 cd dockerized-jekyll-nginx-letsencrypt-cron
 ```
 
+```bash
+docker volume create --name=nginx_conf
+docker volume create --name=letsencrypt_certs
+```
+
+
  - A template to run a Jekyll site served on Nginx using Docker build. 
  
 Execute 
