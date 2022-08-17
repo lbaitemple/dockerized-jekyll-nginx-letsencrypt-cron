@@ -61,3 +61,5 @@ cd ..
 docker-compose logs -f
 ```
 
+common issue
+https://stackoverflow.com/questions/57503011/unable-to-build-cloned-jekyll-site-jekyll-3-8-5-error-permission-denied-d
