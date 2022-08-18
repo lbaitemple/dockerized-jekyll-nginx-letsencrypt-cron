@@ -49,6 +49,9 @@ The command will initiate a new Jekyll site inside the folder named "html".
 Then cp 
 ```
 cp -rf researchweb/* html/
+cd html
+make
+cd ..
 ```
 
 ```
